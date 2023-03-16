@@ -1,0 +1,10 @@
+@import "govuk_publishing_components/govuk_frontend_support";
+@import "govuk_publishing_components/component_support";
+// component specific sass
+@import 'govuk_publishing_components/components/button';
+@import 'govuk_publishing_components/components/error-message';
+@import 'govuk_publishing_components/components/hint';
+@import 'govuk_publishing_components/components/input';
+@import 'govuk_publishing_components/components/label';
+@import 'govuk_publishing_components/components/table';
+@import 'govuk_publishing_components/components/summary-list';

@@ -1,0 +1,39 @@
+<%= render "govuk_publishing_components/components/summary_list", {
+  title: "21 Sticks",
+  items: [
+    {
+      field: "Computer Input",
+      value: @sticks_round.computer_input
+    },
+    {
+      field: "Sticks remaining",
+      value: @sticks_round.ending_sticks_count
+    }
+  ],
+  borderless: false
+} %>
+<%= form_with model: @sticks_round, url: sticks_userinput_url(@sticks_round), method: :post do |form| %>
+  <% if @sticks_round.ending_sticks_count.to_i == 0 %>
+    <h3>Computer wins!!</h3>
+  <% end %>
+
+  <% if @sticks_round.ending_sticks_count.to_i > 0 %>
+    <%= render "govuk_publishing_components/components/input", {
+      label: {
+        text: "User input"
+      },
+      name: "user_input",
+      type: "number",
+      hint: "Please enter a number between 1 and 3",
+      autofocus: true,
+      value: @sticks_round.user_input,
+      tabindex: 0
+    } %>
+    <%= form.hidden_field :ending_sticks_count, :value => @sticks_round.ending_sticks_count %>
+    <%= render "govuk_publishing_components/components/button", {
+      text: "Submit",
+      margin_bottom: 6,
+    } %>
+
+  <% end %>
+<% end %>

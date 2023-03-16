@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_input: MyString
+  computer_input: MyString
+  starting_sticks_count: MyString
+  ending_sticks_count: MyString
+
+two:
+  user_input: MyString
+  computer_input: MyString
+  starting_sticks_count: MyString
+  ending_sticks_count: MyString
