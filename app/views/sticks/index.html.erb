@@ -1,39 +1,76 @@
-<%= render "govuk_publishing_components/components/summary_list", {
-  title: "21 Sticks",
-  items: [
-    {
-      field: "Computer Input",
-      value: @sticks_round.computer_input
-    },
-    {
-      field: "Sticks remaining",
-      value: @sticks_round.ending_sticks_count
-    }
-  ],
-  borderless: false
-} %>
-<%= form_with model: @sticks_round, url: sticks_userinput_url(@sticks_round), method: :post do |form| %>
-  <% if @sticks_round.ending_sticks_count.to_i == 0 %>
-    <h3>Computer wins!!</h3>
-  <% end %>
-
-  <% if @sticks_round.ending_sticks_count.to_i > 0 %>
-    <%= render "govuk_publishing_components/components/input", {
-      label: {
-        text: "User input"
-      },
-      name: "user_input",
-      type: "number",
-      hint: "Please enter a number between 1 and 3",
-      autofocus: true,
-      value: @sticks_round.user_input,
-      tabindex: 0
-    } %>
-    <%= form.hidden_field :ending_sticks_count, :value => @sticks_round.ending_sticks_count %>
-    <%= render "govuk_publishing_components/components/button", {
-      text: "Submit",
-      margin_bottom: 6,
-    } %>
-
-  <% end %>
+<%= render "govuk_publishing_components/components/inverse_header", {
+  full_width: true
+} do %>
+  <div class="gem-c-title gem-c-title--inverse">
+    <h1 class="gem-c-title__text govuk-heading-l page_title">21 Sticks
+    </h1>
+  </div>
 <% end %>
+
+
+<div class="container">
+  <div class="contents">
+    <%= render "govuk_publishing_components/components/govspeak", {
+    } do %>
+      <div class="stat-headline">
+        <p><em><%= @new_sticks_round.starting_sticks_count %></em>
+          sticks in play</p>
+      </div>
+      <div class="stat-headline">
+        <p><em><%= @new_sticks_round.computer_input %></em>
+          stick(s) taken out by computer</p>
+      </div>
+      <!--  <div class="stat-headline">-->
+      <!--    <p>Computer takes out-->
+      <!--      <em><%#= @new_sticks_round.computer_input %></em>-->
+      <!--    </p>-->
+      <!--  </div>-->
+      <!--  <div class="stat-headline">-->
+      <!--    <p>Computer takes out-->
+      <!--      <em><%#= @new_sticks_round.computer_input %></em>-->
+      <!--    </p>-->
+      <!--  </div>-->
+    <% end %>
+
+
+
+    <%= form_with model: @new_sticks_round, url: sticks_userinput_url(@new_sticks_round), data: { turbo: false }, method: :post do |form| %>
+      <% if @new_sticks_round.starting_sticks_count.to_i <= 3 %>
+        <h3>Computer wins!!</h3>
+      <% end %>
+
+      <% if @new_sticks_round.starting_sticks_count.to_i > 3 %>
+        <%= render "govuk_publishing_components/components/input", {
+          label: {
+            text: "How many sticks would you like to take?"
+          },
+          name: "user_input",
+          type: "number",
+          hint: "Please enter a number between 1 and 3",
+          autofocus: true,
+          value: @new_sticks_round.user_input,
+          tabindex: 0,
+          maxlength: 1,
+          width: 5,
+          # suffix: "sticks",
+          # error_message: "Enter the approximate lead time in days, do not include words or symbols.",
+        } %>
+        <%= form.hidden_field :ending_sticks_count, :value => @new_sticks_round.ending_sticks_count %>
+        <%= form.hidden_field :starting_sticks_count, :value => @new_sticks_round.starting_sticks_count %>
+        <%= form.hidden_field :computer_input, :value => @new_sticks_round.computer_input %>
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Submit",
+          margin_bottom: 6,
+        } %>
+
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<br/>
+<br/>
+<br/>
+<%= render "govuk_publishing_components/components/action_link", {
+  text: "New Game",
+  href: sticks_new_game_url
+} %>
