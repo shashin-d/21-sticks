@@ -67,4 +67,20 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+=begin
+To ensure that the development server always compiles assets on-the-fly (and thus always reflects the most recent state
+of the code), the development environment must be configured to keep precompiled assets in a different location than
+production does. Otherwise, any assets precompiled for use in production will clobber requests for them in development
+(i.e., subsequent changes you make to assets will not be reflected in the browser).
+https://guides.rubyonrails.org/asset_pipeline.html#local-precompilation
+=end
+  config.assets.prefix = "/dev-assets"
+
+  # In some circumstances you may wish to use live compilation. In this mode all requests for assets in the pipeline
+  # are handled by Sprockets directly.
+  config.assets.compile = true
+
 end
+
+

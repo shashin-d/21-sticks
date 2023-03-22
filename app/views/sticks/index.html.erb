@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "main_app", "data-turbo-track": "reload" %>
+
 <%= render "govuk_publishing_components/components/inverse_header", {
   full_width: true
 } do %>
@@ -53,7 +55,7 @@
           maxlength: 1,
           width: 5,
           # suffix: "sticks",
-          # error_message: "Enter the approximate lead time in days, do not include words or symbols.",
+          # error_message: @new_sticks_round.errors.messages,
         } %>
         <%= form.hidden_field :ending_sticks_count, :value => @new_sticks_round.ending_sticks_count %>
         <%= form.hidden_field :starting_sticks_count, :value => @new_sticks_round.starting_sticks_count %>

@@ -33,13 +33,14 @@ class SticksController < ApplicationController
       @new_sticks_round.starting_sticks_count = sticks_remaining
     else
       puts @current_sticks_round.valid?
+      puts @current_sticks_round.errors
+      @new_sticks_round = SticksRound.new
       @new_sticks_round.computer_input = @current_sticks_round.computer_input
       @new_sticks_round.user_input = ''
+      # @new_sticks_round.errors = @current_sticks_round.errors
       @new_sticks_round.starting_sticks_count = @current_sticks_round.starting_sticks_count
     end
 
-    # redirect_to controller: 'sticks', action: 'index', sticks_round: @sticks_round
-    # redirect_to sticks_index_url, :sticks_round => @sticks_round, var1: 'rr'
     render :template => 'sticks/index'
   end
 
